@@ -16,13 +16,16 @@ namespace ColorBlunder
 
         public MainPage()
         {
+            ColorGrid colorGrid = new ColorGrid();
+
             InitializeComponent();
             LoadColors();
+            colorGrid.ReadyColors();
         }
 
         public void LoadColors()
         {
-            ColorContainer hueContainer = new ColorContainer();
+            Colors hueContainer = new Colors();
 
             _solutionColors = hueContainer.solutionColors;
             shuffledColors = hueContainer.shuffledColors;
