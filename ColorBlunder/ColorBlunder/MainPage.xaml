@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ColorBlunder.MainPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Text="Sort the Colors!"
+               FontSize="50"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+        <Grid Grid.Row="1"
+              Padding="20,0,20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <BoxView x:Name="Box0_0"
+                     BackgroundColor="White"/>
+            <BoxView x:Name="Box0_1"
+                     BackgroundColor="White"
+                     Grid.Row="1"/>
+            <BoxView x:Name="Box0_2"
+                     BackgroundColor="White"
+                     Grid.Row="2"/>
+            <BoxView x:Name="Box0_3"
+                     BackgroundColor="White"
+                     Grid.Row="3"/>
+            <BoxView x:Name="Box0_4"
+                     BackgroundColor="White"
+                     Grid.Row="4"/>
+            <BoxView x:Name="Box0_5"
+                     BackgroundColor="White"
+                     Grid.Row="5"/>
+            <BoxView x:Name="Box0_6"
+                     BackgroundColor="White"
+                     Grid.Row="6"/>
+            <BoxView x:Name="Box0_7"
+                     BackgroundColor="White"
+                     Grid.Row="7"/>
+            <BoxView x:Name="Box0_8"
+                     BackgroundColor="White"
+                     Grid.Row="8"/>
+            <BoxView x:Name="Box0_9"
+                     BackgroundColor="White"
+                     Grid.Row="9"/>
+        </Grid>
+        <Grid Grid.Row="2"
+              Padding="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="BtnGenerate"
+                    Text="Generate"
+                    FontSize="20"
+                    Clicked="BtnGenerate_Clicked"/>
+            <Button x:Name="BtnPlay"
+                    Text="Play"
+                    FontSize="20"
+                    Grid.Column="1"
+                    Clicked="BtnPlay_Clicked"/>
+        </Grid>
+    </Grid>
+
+</ContentPage>
