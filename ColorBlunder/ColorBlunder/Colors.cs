@@ -9,35 +9,10 @@ namespace ColorBlunder
     public class Colors
     {
         readonly Random rand = new Random();
-        public List<Color> solutionColors;
-        public List<Color> shuffledColors;
+        public List<ColorContainer> solution;
+        public List<ColorContainer> problem;
 
-        public Colors()
-        {
-            ValidateColors();
-        }
-
-        public void ValidateColors()
-        {
-            List<Color> baseColors = new List<Color>()
-            {
-                RandomColor(),
-                RandomColor()
-            };
-
-            float colorDifference = Math.Abs(baseColors[1].GetHue() - baseColors[0].GetHue());
-
-            if (CheckValue(colorDifference))
-            {
-                GenerateColorGradient(baseColors, 10);
-            }
-            else
-            {
-                ValidateColors();
-            }
-        }
-
-        public void GenerateColorGradient(List<Color> baseColors, int size)
+        private void GenerateColorGradient(List<Color> baseColors, int size)
         {
             var tempGradientList = new List<Color>();
             for (int i = 0; i < size; i++)
@@ -47,28 +22,69 @@ namespace ColorBlunder
                 var bAverage = baseColors[0].B + (baseColors[1].B - baseColors[0].B) * i / size;
                 tempGradientList.Add(Color.FromArgb(rAverage, gAverage, bAverage));
             }
-            solutionColors = tempGradientList
+            tempGradientList
                 .OrderBy(color => color.GetHue())
                 .ToList();
-
-            shuffledColors = solutionColors
-                .GetRange(1, 9)
-                .OrderBy(color => rand.Next())
-                .ToList();
+            SetColorProperties(tempGradientList);
         }
 
-        bool CheckValue(double difference)
+        private void SetColorProperties(List<Color> tempColors)
+        {
+            solution = new List<ColorContainer>();
+            foreach (Color color in tempColors)
+            {
+                solution.Add(new ColorContainer
+                {
+                    Color = color,
+                    Row = tempColors.IndexOf(color),
+                    Column = 0
+                });
+            }
+            SetProblemColors(solution);
+        }
+
+        private void SetProblemColors(List<ColorContainer> tempColors)
+        {
+            problem = new List<ColorContainer>();
+            tempColors = solution.GetRange(1, solution.Count - 2);
+            tempColors = tempColors.OrderBy(c => rand.Next()).ToList();
+            tempColors.Insert(0, solution.First());
+            tempColors.Add(solution.Last());
+            problem = tempColors;
+        }
+
+        private bool CheckValue(double difference)
         {
             return (difference >= 45 && difference <= 90);
         }
 
-        public Color RandomColor()
+        private void ValidateColors(List<Color> baseColors)
+        {
+            float colorDifference = Math.Abs(baseColors[1].GetHue() - baseColors[0].GetHue());
+            if (CheckValue(colorDifference))
+            {
+                GenerateColorGradient(baseColors, 10);
+            }
+            else PickColors();
+        }
+
+        private Color RandomColor()
         {
             int r = rand.Next(255);
             int g = rand.Next(255);
             int b = rand.Next(255);
             Color startColor = Color.FromArgb(r, g, b);
             return startColor;
+        }
+
+        public void PickColors()
+        {
+            List<Color> baseColors = new List<Color>()
+            {
+                RandomColor(),
+                RandomColor()
+            };
+            ValidateColors(baseColors);
         }
     }
 }
