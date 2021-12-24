@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using Xamarin.Forms;
+using Color = System.Drawing.Color;
 
 namespace ColorBlunder
 {
     public class Colors
     {
         readonly Random rand = new Random();
-        public List<ColorContainer> solution;
-        public List<ColorContainer> problem;
+        public List<BoxView> solution;
+        public List<BoxView> problem;
 
         public Colors()
         {
@@ -35,7 +37,7 @@ namespace ColorBlunder
 
         private void SetColorProperties(List<Color> tempColors)
         {
-            solution = new List<ColorContainer>();
+            solution = new List<BoxView>();
             foreach (Color color in tempColors)
             {
                 solution.Add(new ColorContainer
@@ -48,9 +50,9 @@ namespace ColorBlunder
             SetProblemColors(solution);
         }
 
-        private void SetProblemColors(List<ColorContainer> tempColors)
+        private void SetProblemColors(List<BoxView> tempColors)
         {
-            problem = new List<ColorContainer>();
+            problem = new List<BoxView>();
             tempColors = solution.GetRange(1, solution.Count - 2);
             tempColors = tempColors.OrderBy(c => rand.Next()).ToList();
             tempColors.Insert(0, solution.First());
