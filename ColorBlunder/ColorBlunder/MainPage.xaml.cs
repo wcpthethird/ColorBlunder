@@ -56,5 +56,11 @@ namespace ColorBlunder
             Box0_8.BackgroundColor = colors.problem[8].Color;
             Box0_9.BackgroundColor = colors.problem[9].Color;
         }
+
+        private void ColorContainer_Tapped(object sender, EventArgs e)
+        {
+            var colorContainer = (BoxView)sender;
+            colorContainer.BackgroundColor = Color.White;
+        }
     }
 }

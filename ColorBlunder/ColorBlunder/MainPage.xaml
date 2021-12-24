@@ -3,18 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ColorBlunder.MainPage">
 
-    <Grid>
+    <Grid Padding="20">
         <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
-        <Label Text="Sort the Colors!"
-               FontSize="50"
+        <Label Text="SORT THE COLORS!"
+               FontSize="40"
+               FontAttributes="Italic"
+               CharacterSpacing="0.125"
                HorizontalOptions="Center"
-               VerticalOptions="Center"/>
+               VerticalOptions="Center"
+               Padding="0,0,0,10"/>
         <Grid Grid.Row="1"
-              Padding="20,0,20,0">
+              Padding="0,10,0,10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -27,28 +30,68 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <BoxView x:Name="Box0_0"/>
+            <BoxView x:Name="Box0_0">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ColorContainer_Tapped"/>
+                </BoxView.GestureRecognizers>
+            </BoxView>
             <BoxView x:Name="Box0_1"
-                     Grid.Row="1"/>
+                     Grid.Row="1">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ColorContainer_Tapped"/>
+                </BoxView.GestureRecognizers>
+            </BoxView>
             <BoxView x:Name="Box0_2"
-                     Grid.Row="2"/>
+                     Grid.Row="2">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ColorContainer_Tapped"/>
+                </BoxView.GestureRecognizers>
+            </BoxView>
             <BoxView x:Name="Box0_3"
-                     Grid.Row="3"/>
+                     Grid.Row="3">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ColorContainer_Tapped"/>
+                </BoxView.GestureRecognizers>
+            </BoxView>
             <BoxView x:Name="Box0_4"
-                     Grid.Row="4"/>
+                     Grid.Row="4">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ColorContainer_Tapped"/>
+                </BoxView.GestureRecognizers>
+            </BoxView>
             <BoxView x:Name="Box0_5"
-                     Grid.Row="5"/>
+                     Grid.Row="5">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ColorContainer_Tapped"/>
+                </BoxView.GestureRecognizers>
+            </BoxView>
             <BoxView x:Name="Box0_6"
-                     Grid.Row="6"/>
+                     Grid.Row="6">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ColorContainer_Tapped"/>
+                </BoxView.GestureRecognizers>
+            </BoxView>
             <BoxView x:Name="Box0_7"
-                     Grid.Row="7"/>
+                     Grid.Row="7">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ColorContainer_Tapped"/>
+                </BoxView.GestureRecognizers>
+            </BoxView>
             <BoxView x:Name="Box0_8"
-                     Grid.Row="8"/>
+                     Grid.Row="8">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ColorContainer_Tapped"/>
+                </BoxView.GestureRecognizers>
+            </BoxView>
             <BoxView x:Name="Box0_9"
-                     Grid.Row="9"/>
+                     Grid.Row="9">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ColorContainer_Tapped"/>
+                </BoxView.GestureRecognizers>
+            </BoxView>
         </Grid>
         <Grid Grid.Row="2"
-              Padding="20">
+              Padding="0,10,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
