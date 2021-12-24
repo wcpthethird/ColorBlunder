@@ -27,34 +27,24 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <BoxView x:Name="Box0_0"
-                     BackgroundColor="White"/>
+            <BoxView x:Name="Box0_0"/>
             <BoxView x:Name="Box0_1"
-                     BackgroundColor="White"
                      Grid.Row="1"/>
             <BoxView x:Name="Box0_2"
-                     BackgroundColor="White"
                      Grid.Row="2"/>
             <BoxView x:Name="Box0_3"
-                     BackgroundColor="White"
                      Grid.Row="3"/>
             <BoxView x:Name="Box0_4"
-                     BackgroundColor="White"
                      Grid.Row="4"/>
             <BoxView x:Name="Box0_5"
-                     BackgroundColor="White"
                      Grid.Row="5"/>
             <BoxView x:Name="Box0_6"
-                     BackgroundColor="White"
                      Grid.Row="6"/>
             <BoxView x:Name="Box0_7"
-                     BackgroundColor="White"
                      Grid.Row="7"/>
             <BoxView x:Name="Box0_8"
-                     BackgroundColor="White"
                      Grid.Row="8"/>
             <BoxView x:Name="Box0_9"
-                     BackgroundColor="White"
                      Grid.Row="9"/>
         </Grid>
         <Grid Grid.Row="2"
