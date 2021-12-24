@@ -12,6 +12,11 @@ namespace ColorBlunder
         public List<ColorContainer> solution;
         public List<ColorContainer> problem;
 
+        public Colors()
+        {
+            PickColors();
+        }
+
         private void GenerateColorGradient(List<Color> baseColors, int size)
         {
             var tempGradientList = new List<Color>();

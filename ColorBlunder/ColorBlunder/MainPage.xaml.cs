@@ -15,7 +15,6 @@ namespace ColorBlunder
         public MainPage()
         {
             InitializeComponent();
-            colors.PickColors();
             SetSolutionColors();
         }
 
