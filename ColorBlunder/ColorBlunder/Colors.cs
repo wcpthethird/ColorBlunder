@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using Xamarin.Forms;
-using Color = System.Drawing.Color;
 
 namespace ColorBlunder
 {
@@ -12,15 +9,15 @@ namespace ColorBlunder
     {
         readonly Random rand = new Random();
 
-        public List<BoxView> solution;
-        public List<BoxView> problem;
+        public List<Color> solution;
+        public List<Color> problem;
 
         public Colors()
         {
             PickColors();
         }
 
-        private void GenerateColorGradient(List<Color> baseColors, int size)
+        private void SetSolutionColors(List<Color> baseColors, int size)
         {
             var tempGradientList = new List<Color>();
 
@@ -36,30 +33,20 @@ namespace ColorBlunder
                 .OrderBy(color => color.GetHue())
                 .ToList();
 
-            SetColorProperties(tempGradientList);
-        }
-
-        private void SetColorProperties(List<Color> tempColors)
-        {
-            solution = new List<BoxView>();
-
-            foreach (Color color in tempColors)
-            {
-                solution.Add(new BoxView { Color = color });
-            }
+            solution = tempGradientList;
             SetProblemColors(solution);
         }
 
-        private void SetProblemColors(List<BoxView> tempColors)
+        private void SetProblemColors(List<Color> solutionColors)
         {
-            problem = new List<BoxView>();
+            problem = new List<Color>();
 
-            tempColors = solution.GetRange(1, solution.Count - 2);
-            tempColors = tempColors.OrderBy(c => rand.Next()).ToList();
-            tempColors.Insert(0, solution.First());
-            tempColors.Add(solution.Last());
+            solutionColors = solution.GetRange(1, solution.Count - 2);
+            solutionColors = solutionColors.OrderBy(c => rand.Next()).ToList();
+            solutionColors.Insert(0, solution.First());
+            solutionColors.Add(solution.Last());
 
-            problem = tempColors;
+            problem = solutionColors;
         }
 
         private bool CheckValue(double difference)
@@ -73,7 +60,7 @@ namespace ColorBlunder
 
             if (CheckValue(colorDifference))
             {
-                GenerateColorGradient(baseColors, 10);
+                SetSolutionColors(baseColors, 10);
             }
             else PickColors();
         }

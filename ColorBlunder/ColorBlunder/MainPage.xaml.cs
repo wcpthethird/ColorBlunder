@@ -1,10 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
+using Color = System.Drawing.Color;
 
 namespace ColorBlunder
 {
@@ -32,49 +31,57 @@ namespace ColorBlunder
             SetProblemColors(colors.problem);
         }
 
-        private void SetSolutionColors(List<BoxView> solutionColors)
+        private void SetSolutionColors(List<Color> solutionColors)
         {
-            Box0_0.Color = solutionColors[0].Color;
-            Box0_1.Color = solutionColors[1].Color;
-            Box0_2.Color = solutionColors[2].Color;
-            Box0_3.Color = solutionColors[3].Color;
-            Box0_4.Color = solutionColors[4].Color;
-            Box0_5.Color = solutionColors[5].Color;
-            Box0_6.Color = solutionColors[6].Color;
-            Box0_7.Color = solutionColors[7].Color;
-            Box0_8.Color = solutionColors[8].Color;
-            Box0_9.Color = solutionColors[9].Color;
+            Box0_0.Color = solutionColors[0];
+            Box0_1.Color = solutionColors[1];
+            Box0_2.Color = solutionColors[2];
+            Box0_3.Color = solutionColors[3];
+            Box0_4.Color = solutionColors[4];
+            Box0_5.Color = solutionColors[5];
+            Box0_6.Color = solutionColors[6];
+            Box0_7.Color = solutionColors[7];
+            Box0_8.Color = solutionColors[8];
+            Box0_9.Color = solutionColors[9];
         }
 
-        public void SetProblemColors(List<BoxView> problemColors)
+        public void SetProblemColors(List<Color> problemColors)
         {
-            Box0_0.Color = problemColors[0].Color;
-            Box0_1.Color = problemColors[1].Color;
-            Box0_2.Color = problemColors[2].Color;
-            Box0_3.Color = problemColors[3].Color;
-            Box0_4.Color = problemColors[4].Color;
-            Box0_5.Color = problemColors[5].Color;
-            Box0_6.Color = problemColors[6].Color;
-            Box0_7.Color = problemColors[7].Color;
-            Box0_8.Color = problemColors[8].Color;
-            Box0_9.Color = problemColors[9].Color;
+            Box0_0.Color = problemColors[0];
+            Box0_1.Color = problemColors[1];
+            Box0_2.Color = problemColors[2];
+            Box0_3.Color = problemColors[3];
+            Box0_4.Color = problemColors[4];
+            Box0_5.Color = problemColors[5];
+            Box0_6.Color = problemColors[6];
+            Box0_7.Color = problemColors[7];
+            Box0_8.Color = problemColors[8];
+            Box0_9.Color = problemColors[9];
+            CheckSolution(colors.solution, colors.problem);
         }
 
-        public bool CheckSolution()
+        public void CheckSolution(List<Color> solution, List<Color> problem)
         {
-            if (colors.problem != colors.solution)
+            List<int> tempProblem = new List<int>();
+            List<int> tempSolution = new List<int>();
+
+            for (int i = 0; i < solution.Count; i++)
             {
-                return false;
+                int solutionIndex = i;
+                int problemIndex = problem.FindIndex(a => a.Name.Contains(solution[i].Name));
+                tempProblem.Add(problemIndex);
+                tempSolution.Add(solutionIndex);
             }
-            return true;
+            if (tempProblem.SequenceEqual(tempSolution))
+            {
+                GameOverMessage();
+            }
+            return;
         }
 
         public void GameOverMessage()
         {
-            if (CheckSolution())
-            {
-                DisplayAlert("Game Over", "You Win!", "Close");
-            }
+            DisplayAlert("Game Over", "You Win!", "Close");
         }
 
         private void ColorContainer_Tapped(object sender, EventArgs e)
@@ -92,13 +99,13 @@ namespace ColorBlunder
 
         private void SwitchGridPosition(List<Color> selectedColors)
         {
-            List<BoxView> tempProblem = colors.problem;
+            List<Color> tempProblem = colors.problem;
 
-            int colorOneIndex = tempProblem.FindIndex(x => x.Color == selectedColors[0]);
-            int colorTwoIndex = tempProblem.FindIndex(x => x.Color == selectedColors[1]);
+            int colorOneIndex = tempProblem.FindIndex(x => x == selectedColors[0]);
+            int colorTwoIndex = tempProblem.FindIndex(x => x == selectedColors[1]);
 
-            tempProblem[colorTwoIndex].Color = selectedColors[0];
-            tempProblem[colorOneIndex].Color = selectedColors[1];
+            tempProblem[colorTwoIndex] = selectedColors[0];
+            tempProblem[colorOneIndex] = selectedColors[1];
 
             colors.problem = tempProblem;
 
