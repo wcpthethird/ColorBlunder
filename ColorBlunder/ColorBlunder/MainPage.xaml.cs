@@ -9,58 +9,46 @@ namespace ColorBlunder
 {
     public partial class MainPage : ContentPage
     {
-        readonly Colors colors;
+        readonly Colors colors = new Colors();
+        public List<Color> userSolution;
         public List<Color> selectedColors = new List<Color>();
+        public bool solved = false;
+
 
         public MainPage()
         {
-            colors = new Colors();
-
             InitializeComponent();
-            SetSolutionColors(colors.solution);
+            StartGame();
         }
 
         private void BtnGenerate_Clicked(object sender, EventArgs e)
         {
-            colors.PickColors();
-            SetSolutionColors(colors.solution);
+            StartGame(CheckSolved(solved));
         }
 
         private void BtnPlay_Clicked(object sender, EventArgs e)
         {
-            SetProblemColors(colors.problem);
+            userSolution = new List<Color>(colors.problem);
+            selectedColors = new List<Color>();
+            SetColors(colors.problem);
+            solved = true;
         }
 
-        private void SetSolutionColors(List<Color> solutionColors)
+        private void SetColors(List<Color> colors)
         {
-            Box0_0.Color = solutionColors[0];
-            Box0_1.Color = solutionColors[1];
-            Box0_2.Color = solutionColors[2];
-            Box0_3.Color = solutionColors[3];
-            Box0_4.Color = solutionColors[4];
-            Box0_5.Color = solutionColors[5];
-            Box0_6.Color = solutionColors[6];
-            Box0_7.Color = solutionColors[7];
-            Box0_8.Color = solutionColors[8];
-            Box0_9.Color = solutionColors[9];
+            Box0_0.Color = colors[0];
+            Box0_1.Color = colors[1];
+            Box0_2.Color = colors[2];
+            Box0_3.Color = colors[3];
+            Box0_4.Color = colors[4];
+            Box0_5.Color = colors[5];
+            Box0_6.Color = colors[6];
+            Box0_7.Color = colors[7];
+            Box0_8.Color = colors[8];
+            Box0_9.Color = colors[9];
         }
 
-        public void SetProblemColors(List<Color> problemColors)
-        {
-            Box0_0.Color = problemColors[0];
-            Box0_1.Color = problemColors[1];
-            Box0_2.Color = problemColors[2];
-            Box0_3.Color = problemColors[3];
-            Box0_4.Color = problemColors[4];
-            Box0_5.Color = problemColors[5];
-            Box0_6.Color = problemColors[6];
-            Box0_7.Color = problemColors[7];
-            Box0_8.Color = problemColors[8];
-            Box0_9.Color = problemColors[9];
-            CheckSolution(colors.solution, colors.problem);
-        }
-
-        public void CheckSolution(List<Color> solution, List<Color> problem)
+        public bool CheckSolution(List<Color> solution, List<Color> problem)
         {
             List<int> tempProblem = new List<int>();
             List<int> tempSolution = new List<int>();
@@ -74,32 +62,16 @@ namespace ColorBlunder
             }
             if (tempProblem.SequenceEqual(tempSolution))
             {
+                solved = false;
                 GameOverMessage();
+                return true;
             }
-            return;
-        }
-
-        public void GameOverMessage()
-        {
-            DisplayAlert("Game Over", "You Win!", "Close");
-        }
-
-        private void ColorContainer_Tapped(object sender, EventArgs e)
-        {
-            BoxView selectedColor = (BoxView)sender;
-
-            selectedColors.Add(selectedColor.Color);
-
-            if (selectedColors.Count == 2)
-            {
-                SwitchGridPosition(selectedColors);
-                selectedColors.Clear();
-            }
+            return false;
         }
 
         private void SwitchGridPosition(List<Color> selectedColors)
         {
-            List<Color> tempProblem = colors.problem;
+            List<Color> tempProblem = userSolution;
 
             int colorOneIndex = tempProblem.FindIndex(x => x == selectedColors[0]);
             int colorTwoIndex = tempProblem.FindIndex(x => x == selectedColors[1]);
@@ -107,9 +79,57 @@ namespace ColorBlunder
             tempProblem[colorTwoIndex] = selectedColors[0];
             tempProblem[colorOneIndex] = selectedColors[1];
 
-            colors.problem = tempProblem;
+            userSolution = tempProblem;
+            selectedColors.Clear();
+            SetColors(userSolution);
+            CheckSolution(colors.solution, userSolution);
+        }
 
-            SetProblemColors(colors.problem);
+        public void GameOverMessage()
+        {
+            NewGamePrompt();
+            DisplayAlert("Game Over", "You Win!", $"Close");
+        }
+
+        private void ColorContainer_Tapped(object sender, EventArgs e)
+        {
+            BoxView selectedColor = (BoxView)sender;
+            if (CheckSolved(solved))
+            {
+                selectedColors.Add(selectedColor.Color);
+                if (selectedColors.Count == 2) SwitchGridPosition(selectedColors);
+            }
+        }
+
+        public async void NewGamePrompt()
+        {
+            bool answer = await DisplayAlert("New Game", "Would you like to start a new game?", "Yes", "No");
+            if (!answer) return;
+            else StartGame();
+        }
+
+        public void StartGame()
+        {
+            colors.PickColors();
+            SetColors(colors.solution);
+            solved = false;
+        }
+
+        public void StartGame(bool gameState)
+        {
+            if (!gameState) StartGame();
+            else NewGamePrompt();
+        }
+
+        public void NewGame()
+        {
+            if (CheckSolved(solved)) StartGame();
+        }
+
+        public bool CheckSolved(bool gameState)
+        {
+            if (gameState) return true;
+            else return false;
         }
     }
 }
