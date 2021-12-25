@@ -11,6 +11,7 @@ namespace ColorBlunder
     public class Colors
     {
         readonly Random rand = new Random();
+
         public List<BoxView> solution;
         public List<BoxView> problem;
 
@@ -22,22 +23,26 @@ namespace ColorBlunder
         private void GenerateColorGradient(List<Color> baseColors, int size)
         {
             var tempGradientList = new List<Color>();
+
             for (int i = 0; i < size; i++)
             {
                 var rAverage = baseColors[0].R + (baseColors[1].R - baseColors[0].R) * i / size;
                 var gAverage = baseColors[0].G + (baseColors[1].G - baseColors[0].G) * i / size;
                 var bAverage = baseColors[0].B + (baseColors[1].B - baseColors[0].B) * i / size;
+
                 tempGradientList.Add(Color.FromArgb(rAverage, gAverage, bAverage));
             }
             tempGradientList
                 .OrderBy(color => color.GetHue())
                 .ToList();
+
             SetColorProperties(tempGradientList);
         }
 
         private void SetColorProperties(List<Color> tempColors)
         {
             solution = new List<BoxView>();
+
             foreach (Color color in tempColors)
             {
                 solution.Add(new BoxView { Color = color });
@@ -48,10 +53,12 @@ namespace ColorBlunder
         private void SetProblemColors(List<BoxView> tempColors)
         {
             problem = new List<BoxView>();
+
             tempColors = solution.GetRange(1, solution.Count - 2);
             tempColors = tempColors.OrderBy(c => rand.Next()).ToList();
             tempColors.Insert(0, solution.First());
             tempColors.Add(solution.Last());
+
             problem = tempColors;
         }
 
@@ -63,6 +70,7 @@ namespace ColorBlunder
         private void ValidateColors(List<Color> baseColors)
         {
             float colorDifference = Math.Abs(baseColors[1].GetHue() - baseColors[0].GetHue());
+
             if (CheckValue(colorDifference))
             {
                 GenerateColorGradient(baseColors, 10);
@@ -75,7 +83,9 @@ namespace ColorBlunder
             int r = rand.Next(255);
             int g = rand.Next(255);
             int b = rand.Next(255);
+
             Color startColor = Color.FromArgb(r, g, b);
+
             return startColor;
         }
 

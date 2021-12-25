@@ -16,6 +16,7 @@ namespace ColorBlunder
         public MainPage()
         {
             colors = new Colors();
+
             InitializeComponent();
             SetSolutionColors(colors.solution);
         }
@@ -79,7 +80,9 @@ namespace ColorBlunder
         private void ColorContainer_Tapped(object sender, EventArgs e)
         {
             BoxView selectedColor = (BoxView)sender;
+
             selectedColors.Add(selectedColor.Color);
+
             if (selectedColors.Count == 2)
             {
                 SwitchGridPosition(selectedColors);
@@ -90,11 +93,15 @@ namespace ColorBlunder
         private void SwitchGridPosition(List<Color> selectedColors)
         {
             List<BoxView> tempProblem = colors.problem;
+
             int colorOneIndex = tempProblem.FindIndex(x => x.Color == selectedColors[0]);
             int colorTwoIndex = tempProblem.FindIndex(x => x.Color == selectedColors[1]);
+
             tempProblem[colorTwoIndex].Color = selectedColors[0];
             tempProblem[colorOneIndex].Color = selectedColors[1];
+
             colors.problem = tempProblem;
+
             SetProblemColors(colors.problem);
         }
     }
