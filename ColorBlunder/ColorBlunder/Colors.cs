@@ -40,12 +40,7 @@ namespace ColorBlunder
             solution = new List<BoxView>();
             foreach (Color color in tempColors)
             {
-                solution.Add(new ColorContainer
-                {
-                    Color = color,
-                    Row = tempColors.IndexOf(color),
-                    Column = 0
-                });
+                solution.Add(new BoxView { Color = color });
             }
             SetProblemColors(solution);
         }
