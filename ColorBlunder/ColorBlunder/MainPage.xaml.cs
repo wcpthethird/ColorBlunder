@@ -10,8 +10,8 @@ namespace ColorBlunder
     public partial class MainPage : ContentPage
     {
         readonly Colors colors = new Colors();
-        public List<Color> tempSolution;
-        public List<Color> selectedColors = new List<Color>();
+        public List<Color> userSolution;
+        public List<Color> selectedColors;
         public bool solved = false;
 
 
@@ -33,7 +33,7 @@ namespace ColorBlunder
 
         public void PlayGame(List<Color> unsolved)
         {
-            tempSolution = new List<Color>(colors.problem);
+            userSolution = new List<Color>(colors.problem);
             selectedColors = new List<Color>();
             SetColors(unsolved);
             solved = true;
@@ -76,18 +76,15 @@ namespace ColorBlunder
 
         private void SwitchGridPosition(List<Color> selectedColors)
         {
-            List<Color> tempProblem = tempSolution;
+            int colorOneIndex = userSolution.FindIndex(x => x == selectedColors[0]);
+            int colorTwoIndex = userSolution.FindIndex(x => x == selectedColors[1]);
 
-            int colorOneIndex = tempProblem.FindIndex(x => x == selectedColors[0]);
-            int colorTwoIndex = tempProblem.FindIndex(x => x == selectedColors[1]);
+            userSolution[colorTwoIndex] = selectedColors[0];
+            userSolution[colorOneIndex] = selectedColors[1];
 
-            tempProblem[colorTwoIndex] = selectedColors[0];
-            tempProblem[colorOneIndex] = selectedColors[1];
-
-            tempSolution = tempProblem;
             selectedColors.Clear();
-            SetColors(tempSolution);
-            CheckSolution(colors.solution, tempSolution);
+            SetColors(userSolution);
+            CheckSolution(colors.solution, userSolution);
         }
 
         public void GameOverMessage()
