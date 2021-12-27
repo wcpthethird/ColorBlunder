@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
@@ -13,7 +12,6 @@ namespace ColorBlunder
         public List<Color> userSolution;
         public List<Color> selectedColors;
         public bool solved = false;
-
 
         public MainPage()
         {
@@ -41,16 +39,16 @@ namespace ColorBlunder
 
         private void SetColors(List<Color> colors)
         {
-            Box0_0.Color = colors[0];
-            Box0_1.Color = colors[1];
-            Box0_2.Color = colors[2];
-            Box0_3.Color = colors[3];
-            Box0_4.Color = colors[4];
-            Box0_5.Color = colors[5];
-            Box0_6.Color = colors[6];
-            Box0_7.Color = colors[7];
-            Box0_8.Color = colors[8];
-            Box0_9.Color = colors[9];
+            Box0_0.BackgroundColor = colors[0];
+            Box0_1.BackgroundColor = colors[1];
+            Box0_2.BackgroundColor = colors[2];
+            Box0_3.BackgroundColor = colors[3];
+            Box0_4.BackgroundColor = colors[4];
+            Box0_5.BackgroundColor = colors[5];
+            Box0_6.BackgroundColor = colors[6];
+            Box0_7.BackgroundColor = colors[7];
+            Box0_8.BackgroundColor = colors[8];
+            Box0_9.BackgroundColor = colors[9];
         }
 
         public bool CheckSolution(List<Color> solution, List<Color> problem)
@@ -95,10 +93,10 @@ namespace ColorBlunder
 
         private void ColorContainer_Tapped(object sender, EventArgs e)
         {
-            BoxView selectedColor = (BoxView)sender;
+            ColorContainer selectedColor = (ColorContainer)sender;
             if (CheckSolved(solved))
             {
-                selectedColors.Add(selectedColor.Color);
+                selectedColors.Add(selectedColor.BackgroundColor);
                 if (selectedColors.Count == 2) SwitchGridPosition(selectedColors);
             }
         }
