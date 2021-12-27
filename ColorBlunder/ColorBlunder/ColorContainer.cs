@@ -6,5 +6,6 @@ namespace ColorBlunder
     public class ColorContainer: BoxView
     {
         public new Color Color { get; set; }
+        public bool IsHighlighted { get; set; } = false;
     }
 }

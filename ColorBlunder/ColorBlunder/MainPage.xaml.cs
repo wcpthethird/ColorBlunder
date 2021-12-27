@@ -96,16 +96,26 @@ namespace ColorBlunder
             ColorContainer selectedColor = (ColorContainer)sender;
             if (CheckSolved(solved))
             {
+                selectedColor.IsHighlighted = true;
                 selectedColors.Add(selectedColor.BackgroundColor);
-                if (selectedColors.Count == 2) SwitchGridPosition(selectedColors);
+                if (selectedColors.Count == 2)
+                {
+                    SwitchGridPosition(selectedColors);
+                }
             }
         }
 
         public async void NewGamePrompt()
         {
             bool answer = await DisplayAlert("New Game", "Would you like to start a new game?", "Yes", "No");
-            if (!answer) return;
-            else StartGame();
+            if (!answer)
+            {
+                return;
+            }
+            else
+            {
+                StartGame();
+            }
         }
 
         public void StartGame()
@@ -117,19 +127,27 @@ namespace ColorBlunder
 
         public void StartGame(bool gameState)
         {
-            if (!gameState) StartGame();
-            else NewGamePrompt();
+            if (!gameState)
+            {
+                StartGame();
+            }
+            else
+            {
+                NewGamePrompt();
+            }
         }
 
         public void NewGame()
         {
-            if (CheckSolved(solved)) StartGame();
+            if (CheckSolved(solved))
+            {
+                StartGame();
+            }
         }
 
         public bool CheckSolved(bool gameState)
         {
-            if (gameState) return true;
-            else return false;
+            return gameState;
         }
     }
 }
