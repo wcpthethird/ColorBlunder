@@ -39,10 +39,7 @@ namespace ColorBlunder
 
         private void SetProblemColors(List<Color> solutionColors)
         {
-            problem = new List<Color>();
-
-            solutionColors = solution.GetRange(1, solution.Count - 2);
-            solutionColors = solutionColors.OrderBy(c => rand.Next()).ToList();
+            solutionColors = solution.GetRange(1, solution.Count - 2).OrderBy(c => rand.Next()).ToList();
             solutionColors.Insert(0, solution.First());
             solutionColors.Add(solution.Last());
 

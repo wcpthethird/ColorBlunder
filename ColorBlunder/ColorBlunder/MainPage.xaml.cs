@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Xamarin.Forms;
 using Color = System.Drawing.Color;
@@ -9,6 +10,7 @@ namespace ColorBlunder
     public partial class MainPage : ContentPage
     {
         readonly Colors colors = new Colors();
+        public ObservableCollection<Color> tempSolution;
         public List<Color> userSolution;
         public List<Color> selectedColors;
         public bool solved = false;
@@ -17,6 +19,7 @@ namespace ColorBlunder
         {
             InitializeComponent();
             StartGame();
+            tempSolution = new ObservableCollection<Color>(colors.solution);
         }
 
         private void BtnGenerate_Clicked(object sender, EventArgs e)
