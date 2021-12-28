@@ -7,7 +7,7 @@ using Color = System.Drawing.Color;
 
 namespace ColorBlunder
 {
-    public partial class MainPage : ContentPage
+    public partial class GamePage : ContentPage
     {
         readonly Colors colors = new Colors();
         public ObservableCollection<Color> tempSolution;
@@ -15,7 +15,7 @@ namespace ColorBlunder
         public List<Color> selectedColors;
         public bool solved = false;
 
-        public MainPage()
+        public GamePage()
         {
             InitializeComponent();
             StartGame();
