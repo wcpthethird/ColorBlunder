@@ -40,44 +40,44 @@ namespace ColorBlunder
             solved = true;
         }
 
-        private void SetColors(List<Color> colors)
+        private void SetColors(List<Color> solution)
         {
-            Box0_0.BackgroundColor = colors[0];
-            Box0_1.BackgroundColor = colors[1];
-            Box0_2.BackgroundColor = colors[2];
-            Box0_3.BackgroundColor = colors[3];
-            Box0_4.BackgroundColor = colors[4];
-            Box0_5.BackgroundColor = colors[5];
-            Box0_6.BackgroundColor = colors[6];
-            Box0_7.BackgroundColor = colors[7];
-            Box0_8.BackgroundColor = colors[8];
-            Box0_9.BackgroundColor = colors[9];
+            Box0_0.BackgroundColor = solution[0];
+            Box0_1.BackgroundColor = solution[1];
+            Box0_2.BackgroundColor = solution[2];
+            Box0_3.BackgroundColor = solution[3];
+            Box0_4.BackgroundColor = solution[4];
+            Box0_5.BackgroundColor = solution[5];
+            Box0_6.BackgroundColor = solution[6];
+            Box0_7.BackgroundColor = solution[7];
+            Box0_8.BackgroundColor = solution[8];
+            Box0_9.BackgroundColor = solution[9];
         }
 
-        private void SetColors(ObservableCollection<Color> colors)
+        private void SetColors(ObservableCollection<Color> userSolution)
         {
-            Box0_0.BackgroundColor = colors[0];
-            Box0_1.BackgroundColor = colors[1];
-            Box0_2.BackgroundColor = colors[2];
-            Box0_3.BackgroundColor = colors[3];
-            Box0_4.BackgroundColor = colors[4];
-            Box0_5.BackgroundColor = colors[5];
-            Box0_6.BackgroundColor = colors[6];
-            Box0_7.BackgroundColor = colors[7];
-            Box0_8.BackgroundColor = colors[8];
-            Box0_9.BackgroundColor = colors[9];
-            CheckSolved(solved);
+            Box0_0.BackgroundColor = userSolution[0];
+            Box0_1.BackgroundColor = userSolution[1];
+            Box0_2.BackgroundColor = userSolution[2];
+            Box0_3.BackgroundColor = userSolution[3];
+            Box0_4.BackgroundColor = userSolution[4];
+            Box0_5.BackgroundColor = userSolution[5];
+            Box0_6.BackgroundColor = userSolution[6];
+            Box0_7.BackgroundColor = userSolution[7];
+            Box0_8.BackgroundColor = userSolution[8];
+            Box0_9.BackgroundColor = userSolution[9];
+            CheckSolution(userSolution);
         }
 
-        public bool CheckSolution(List<Color> solution, List<Color> problem)
+        public bool CheckSolution(ObservableCollection<Color> userSolution)
         {
             List<int> tempProblem = new List<int>();
             List<int> tempSolution = new List<int>();
 
-            for (int i = 0; i < solution.Count; i++)
+            for (int i = 0; i < colors.solution.Count; i++)
             {
                 int solutionIndex = i;
-                int problemIndex = problem.FindIndex(a => a.Name.Contains(solution[i].Name));
+                int problemIndex = userSolution.ToList().FindIndex(a => a.Name.Contains(colors.solution[i].Name));
                 tempProblem.Add(problemIndex);
                 tempSolution.Add(solutionIndex);
             }
