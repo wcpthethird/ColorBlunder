@@ -54,6 +54,21 @@ namespace ColorBlunder
             Box0_9.BackgroundColor = colors[9];
         }
 
+        private void SetColors(ObservableCollection<Color> colors)
+        {
+            Box0_0.BackgroundColor = colors[0];
+            Box0_1.BackgroundColor = colors[1];
+            Box0_2.BackgroundColor = colors[2];
+            Box0_3.BackgroundColor = colors[3];
+            Box0_4.BackgroundColor = colors[4];
+            Box0_5.BackgroundColor = colors[5];
+            Box0_6.BackgroundColor = colors[6];
+            Box0_7.BackgroundColor = colors[7];
+            Box0_8.BackgroundColor = colors[8];
+            Box0_9.BackgroundColor = colors[9];
+            CheckSolved(solved);
+        }
+
         public bool CheckSolution(List<Color> solution, List<Color> problem)
         {
             List<int> tempProblem = new List<int>();
@@ -75,7 +90,7 @@ namespace ColorBlunder
             return false;
         }
 
-        private void SwitchGridPosition(List<Color> selectedColors)
+        private void SwitchGridPosition(List<Color> selectedColors, List<Color> userSolution)
         {
             int colorOneIndex = userSolution.FindIndex(x => x == selectedColors[0]);
             int colorTwoIndex = userSolution.FindIndex(x => x == selectedColors[1]);
@@ -84,8 +99,9 @@ namespace ColorBlunder
             userSolution[colorOneIndex] = selectedColors[1];
 
             selectedColors.Clear();
-            SetColors(userSolution);
-            CheckSolution(colors.solution, userSolution);
+
+            tempSolution = new ObservableCollection<Color>(userSolution);
+            SetColors(tempSolution);
         }
 
         public void GameOverMessage()
@@ -96,14 +112,13 @@ namespace ColorBlunder
 
         private void ColorContainer_Tapped(object sender, EventArgs e)
         {
-            ColorContainer selectedColor = (ColorContainer)sender;
+            BoxView selectedColor = (BoxView)sender;
             if (CheckSolved(solved))
             {
-                selectedColor.IsHighlighted = true;
                 selectedColors.Add(selectedColor.BackgroundColor);
                 if (selectedColors.Count == 2)
                 {
-                    SwitchGridPosition(selectedColors);
+                    SwitchGridPosition(selectedColors, userSolution);
                 }
             }
         }
